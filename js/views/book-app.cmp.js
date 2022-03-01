@@ -4,6 +4,7 @@ import bookList from '../cmps/book-list.cmp.js';
 import bookDetails from './book-details.cmp.js';
 // import bookReview from './review-add.cmp.js';
 import { eventBook } from '../services/eventBook-service.js';
+import bookAdd from './book-add.cmp.js';
 
 
 export default {
@@ -11,7 +12,7 @@ export default {
         <section class="book-app">
             
             <book-filter @filtered="setFilter" v-if="!selectedBook"/>
-            <!-- <book-review  @saved="saveReview" /> -->
+            <book-add  v-if="isAdd" @addedBook="onAddBooks" />
             <book-list :books="booksToShow" @remove="removeBook"  @selected="selectBook"></book-list>
             <book-details v-if="selectedBook" :book="selectedBook"  @close="selectedBook = null" />
    
@@ -24,13 +25,15 @@ export default {
         bookList,
         bookDetails,
         // bookReview
-        eventBook
+        eventBook,
+        bookAdd,
     },
     data() {
         return {
             books: null,
             filterBy: null,
-            selectedBook: null
+            selectedBook: null,
+            isAdd: null
         };
     },
     created() {
@@ -38,6 +41,10 @@ export default {
             .then(books => this.books = books);
     },
     methods: {
+        onAddBooks(updatedBooks) {
+            this.books = updatedBooks
+
+        },
         selectBook(book) {
             this.selectedBook = book;
 

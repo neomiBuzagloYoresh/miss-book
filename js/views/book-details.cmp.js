@@ -37,7 +37,7 @@ export default {
     },
     created() {
         const id = this.$route.params.bookId;
-        console.log(id)
+        // console.log(id)
         bookService.get(id)
             .then(book => this.book = book);
     },

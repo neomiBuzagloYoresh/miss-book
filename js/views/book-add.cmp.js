@@ -7,24 +7,26 @@ export default {
         <section class="book-add app-main">
         <h3>This is a book add</h3>
         <form @submit.prevent="searchBooks">
-        <input type="text" v-model="bookName"  :list="listId" />
+        <input type="search" v-model="bookName" />
         <button>Search Books</button>
          </form>
-          <ul>
-                    <li></li>
+          <ul class="book-add-list" v-for="book in books">
+
+                    <li>{{book.volumeInfo.title}}</li><button @click="addBook(book)">ADD</button>
           </ul>
-
-            <!-- <pre>{{answers}}</pre> -->
-
+          
+            <!-- <pre>{{books}}</pre> -->
+            
         </section>
     `,
     data() {
         return {
             bookName: '',
-            answers: []
+            books: []
         }
     },
     created() {
+
         console.log("got here");
 
     },
@@ -33,15 +35,25 @@ export default {
         searchBooks() {
             bookService.getBooksFromApi(this.bookName)
                 .then((data) => {
-                    console.log('data', data);
-                    this.answers = data
+                    console.log('search', data);
+                    this.books = data.items
                 })
-            // console.log('search', this.bookName);
+                .catch()
+            // console.log('answers', answers);
+
+        },
+
+        addBook(book) {
+            bookService.addGoogleBook(book)
+                .then(book => {
+                    console.log('book', book);
+                    bookService.query()
+                        .then(updatedBooks => this.$emit('addedBook', updatedBooks));
+                })
 
         }
     },
     computed: {
-        // bookSearch
     },
     watch: {
 

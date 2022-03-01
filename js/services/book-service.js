@@ -2,7 +2,7 @@ import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
 // const bookUrl = 'https//www.googleapis.com/books/v1/volumes?printType=books&q=effective%20javascript';
-
+const GOOGLE_KEY = 'search';
 const BOOK_KEY = 'books';
 _createBooks();
 
@@ -14,24 +14,48 @@ export const bookService = {
     addReview,
     removeReview,
     // getById,
-    getBooksFromApi
+    getBooksFromApi,
+    addGoogleBook
 };
 // function getById() {
 //     return Promise.resolve(addBook);
 // }
 
 function getBooksFromApi(searchStr) {
-
-    const prm = axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchStr}`)
-    prm.then(res => res.data)
-    prm.catch(err => {
-        console.log(err, 'oops')
-    })
-    return prm
-
-
+    let searchBooks = utilService.loadFromStorage(GOOGLE_KEY);
+    if (!searchBooks || !searchBooks.length) {
+        return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchStr}`)
+            .then(res => {
+                res.data
+                utilService.saveToStorage(GOOGLE_KEY, res.data)
+                return res.data
+            })
+            .catch(err => {
+                console.log(err, 'oops')
+            })
+    }
+    return Promise.resolve(searchBooks);
 }
 
+function addGoogleBook(googleBook) {
+
+    const bookConvert = {
+
+        title: googleBook.volumeInfo.title,
+        authors: googleBook.volumeInfo.authors || 'koral',
+        publishedDate: googleBook.volumeInfo.publishedDate,
+        description: googleBook.volumeInfo.description || 'lolo',
+        thumbnail: googleBook.volumeInfo.imageLinks.thumbnail,
+        pageCount: googleBook.volumeInfo.pageCount,
+        listPrice: {
+            amount: 109,
+            currencyCode: 'EUR',
+            isOnSale: false
+        }
+
+    };
+    return storageService.post(BOOK_KEY, bookConvert)
+}
 
 function query() {
     return storageService.query(BOOK_KEY);
