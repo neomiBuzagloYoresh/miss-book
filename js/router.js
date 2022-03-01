@@ -2,7 +2,7 @@ import bookApp from './views/book-app.cmp.js';
 import homePage from './views/home-page.cmp.js'
 import aboutPage from './views/about-page.cmp.js'
 import bookDetails from './views/book-details.cmp.js';
-// import bookReview from './views/review-add.cmp.js';
+import addBook from './views/book-add.cmp.js';
 
 const routes = [
     {
@@ -21,10 +21,10 @@ const routes = [
         path: '/book/:bookId',
         component: bookDetails
     },
-    // {
-    //     path: '/book/review',
-    //     component: bookReview
-    // },
+    {
+        path: '/book-add',
+        component: addBook
+    },
 ];
 
 export const router = VueRouter.createRouter({
