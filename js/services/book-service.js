@@ -1,6 +1,8 @@
 import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
+// const bookUrl = 'https//www.googleapis.com/books/v1/volumes?printType=books&q=effective%20javascript';
+
 const BOOK_KEY = 'books';
 _createBooks();
 
@@ -10,8 +12,25 @@ export const bookService = {
     get,
     remove,
     addReview,
-    removeReview
+    removeReview,
+    // getById,
+    getBooksFromApi
 };
+// function getById() {
+//     return Promise.resolve(addBook);
+// }
+
+function getBooksFromApi(searchStr) {
+
+    const prm = axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchStr}`)
+    prm.then(res => res.data)
+    prm.catch(err => {
+        console.log(err, 'oops')
+    })
+    return prm
+
+
+}
 
 
 function query() {
