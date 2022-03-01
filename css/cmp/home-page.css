@@ -1,0 +1,8 @@
+img.bookImg {
+  display: flex;
+  height: 500px;
+  width: 800px;
+  margin-left: 30px;
+  padding: 50px;
+  object-fit: contain;
+}

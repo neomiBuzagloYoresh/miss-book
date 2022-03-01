@@ -11,7 +11,9 @@ const routes = [
     },
     {
         path: '/about',
-        component: aboutPage
+        component: aboutPage,
+
+
     },
     {
         path: '/book',

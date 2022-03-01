@@ -11,11 +11,10 @@ export default {
         <button>Search Books</button>
          </form>
           <ul class="book-add-list" v-for="book in books">
-
                     <li>{{book.volumeInfo.title}}</li><button @click="addBook(book)">ADD</button>
           </ul>
           
-            <!-- <pre>{{books}}</pre> -->
+       
             
         </section>
     `,
@@ -39,19 +38,18 @@ export default {
                     this.books = data.items
                 })
                 .catch()
-            // console.log('answers', answers);
+
 
         },
 
         addBook(book) {
             bookService.addGoogleBook(book)
-                .then(book => {
-                    console.log('book', book);
-                    bookService.query()
-                        .then(updatedBooks => this.$emit('addedBook', updatedBooks));
-                })
 
+            bookService.query()
+                .then(updatedBooks => this.$emit('addedBook', updatedBooks));
         }
+
+
     },
     computed: {
     },

@@ -19,6 +19,9 @@ export default {
             </div>
             <!-- <book-review @save="setReview"/> -->
             <book-review  :bookId="book.id"/>
+          
+            <router-link :to="'/book/'+book.prevbookId">Prev book</router-link> | 
+             <router-link :to="'/book/'+book.nextbookId">Next book</router-link> |
         </section>
     `,
 
@@ -32,13 +35,14 @@ export default {
         return {
             sale: false,
             book: null,
-
+            bookId: null
         }
     },
     created() {
         const id = this.$route.params.bookId;
         // console.log(id)
         bookService.get(id)
+
             .then(book => this.book = book);
     },
 
@@ -53,10 +57,18 @@ export default {
             this.book.reviews.push(newReview);
             bookService.save(this.book);
         },
+        loadBook() {
+            bookService.get(this.bookId)
+                .then(book => this.book = book);
+        }
+
     },
 
 
     computed: {
+        bookId() {
+            return this.$route.params.bookId
+        },
         pageCounts() {
             if (this.book.pageCount >= 500) return `${this.book.pageCount} Long reading`
             if (this.book.pageCount > 200 && this.book.pageCount <= 100) return `${this.book.pageCount} Decent Reading`
@@ -81,6 +93,24 @@ export default {
         },
 
 
+    },
+    watch: {
+        '$route.params.bookId': {
+            handler() {
+                this.bookId = this.$route.params.bookId;
+                bookService.get(this.bookId)
+                    .then(book => this.book = book);
+            },
+            immediate: true,
+        }
     }
+
 }
 
+
+
+// Add router links: next-book, previous-book, that renders the next/prev book, you will need to watch the
+// route, something like:
+// watch: {
+// '$route.params.id’(id){ ... }
+// }

@@ -4,7 +4,7 @@ export default {
         <section class="book-preview">
             
             <p>book name: {{book.title}}</p>
-            <!-- <p>book price: {{formattedNumber}}</p>  -->
+            <p>book price: {{formattedNumber}}</p> 
             <img :src="book.thumbnail">
            
         </section>

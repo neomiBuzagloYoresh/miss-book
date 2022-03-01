@@ -13,13 +13,10 @@ export const bookService = {
     remove,
     addReview,
     removeReview,
-    // getById,
+
     getBooksFromApi,
     addGoogleBook
 };
-// function getById() {
-//     return Promise.resolve(addBook);
-// }
 
 function getBooksFromApi(searchStr) {
     let searchBooks = utilService.loadFromStorage(GOOGLE_KEY);
@@ -40,12 +37,12 @@ function getBooksFromApi(searchStr) {
 function addGoogleBook(googleBook) {
 
     const bookConvert = {
-
+        "id": googleBook.id,
         title: googleBook.volumeInfo.title,
-        authors: googleBook.volumeInfo.authors || 'koral',
+        authors: googleBook.volumeInfo.authors || 'Unknown',
         publishedDate: googleBook.volumeInfo.publishedDate,
-        description: googleBook.volumeInfo.description || 'lolo',
-        thumbnail: googleBook.volumeInfo.imageLinks.thumbnail,
+        description: googleBook.volumeInfo.description || 'the best book ever',
+        thumbnail: googleBook.volumeInfo.imageLinks.thumbnail || 'Unknown',
         pageCount: googleBook.volumeInfo.pageCount,
         listPrice: {
             amount: 109,
@@ -66,7 +63,10 @@ function remove(bookId) {
 
 
 function get(bookId) {
-    return storageService.get(BOOK_KEY, bookId);
+    return storageService.get(BOOK_KEY, bookId)
+        .then(book => {
+            return _setNextPrevbookId(book)
+        })
 }
 
 function save(book) {
@@ -545,3 +545,12 @@ function _createBooks() {
 
 
 
+
+function _setNextPrevbookId(book) {
+    return storageService.query(BOOK_KEY).then(books => {
+        const bookIdx = books.findIndex(currbook => currbook.id === book.id)
+        book.nextbookId = (books[bookIdx + 1]) ? books[bookIdx + 1].id : books[0].id
+        book.prevbookId = (books[bookIdx - 1]) ? books[bookIdx - 1].id : books[books.length - 1].id
+        return book
+    })
+}
