@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+
+  background-image: linear-gradient(
+    to left bottom,
+    #000000,
+    #211b1f,
+    #35313d,
+    #424c5e,
+    #47697d,
+    #447e8d,
+    #469296,
+    #56a698,
+    #68b38f,
+    #86be83,
+    #aac676,
+    #d4cb6d
+  );
+  /* object-fit: cover; */
+}
+
+button {
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  /* padding: 10px 15px; */
+  text-align: center;
+
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  /* -webkit-user-select: none; */
+  touch-action: manipulation;
+
+  margin: 20px;
+}
+
+button:not(:disabled):hover,
+button:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2),
+    0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+button:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.user-msg {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  padding: 10px;
+}
+
+.success {
+  background-color: rgb(144, 223, 144);
+}
+
+.error {
+  background-color: red;
+  color: white;
+}

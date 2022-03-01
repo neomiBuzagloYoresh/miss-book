@@ -1,0 +1,41 @@
+ul.book-list {
+  display: flex;
+  list-style-type: none;
+  /* margin: 20px; */
+  flex-wrap: wrap;
+  gap: 10px;
+  /* height: 50vh; */
+}
+
+.book-list li {
+  /* height: 200px; */
+  /* width: 400px;  */
+  flex-basis: 20%;
+  background-color: rgba(49, 68, 67, 0.527);
+  border: 2px solid black;
+  border-radius: 5%;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.red {
+  color: rgba(233, 10, 10, 0.678);
+}
+
+.green {
+  color: rgba(46, 128, 50, 0.678);
+}
+
+/* .actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  font-family: Verdana, Tahoma, sans-serif;
+  align-items: center;
+  align-content: space-around;
+  gap: 10px;
+} */

@@ -1,0 +1,28 @@
+.Book-review {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  background-color: brown;
+  height: 600px;
+  border-radius: 7%;
+  margin-bottom: 0;
+  max-width: 400px;
+}
+
+/* .review {
+  height: 100px;
+} */
+
+.Book-add-rev {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  max-width: 400px;
+  max-height: 500px;
+  align-items: stretch;
+  /* flex-shrink: 2; */
+  /* flex-basis: 30%; */
+  /* height: 200px;
+  width: 200px; */
+}
