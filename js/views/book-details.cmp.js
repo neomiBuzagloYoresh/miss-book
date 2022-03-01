@@ -57,10 +57,10 @@ export default {
             this.book.reviews.push(newReview);
             bookService.save(this.book);
         },
-        loadBook() {
-            bookService.get(this.bookId)
-                .then(book => this.book = book);
-        }
+        // loadBook() {
+        //     bookService.get(this.bookId)
+        //         .then(book => this.book = book);
+        // }
 
     },
 
@@ -109,8 +109,3 @@ export default {
 
 
 
-// Add router links: next-book, previous-book, that renders the next/prev book, you will need to watch the
-// route, something like:
-// watch: {
-// '$route.params.id’(id){ ... }
-// }

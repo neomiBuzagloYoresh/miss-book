@@ -7,7 +7,7 @@ export default {
         <section class="book-add app-main">
         <h3>This is a book add</h3>
         <form @submit.prevent="searchBooks">
-        <input type="search" v-model="bookName" />
+        <input ref="input" type="text" v-model="bookName"  placeholder="Add-book?" class="add-book-input"/>
         <button>Search Books</button>
          </form>
           <ul class="book-add-list" v-for="book in books">
@@ -51,9 +51,7 @@ export default {
 
 
     },
-    computed: {
+    mounted() {
+        this.$refs.input.focus()
     },
-    watch: {
-
-    }
 }

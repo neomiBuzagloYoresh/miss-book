@@ -1,8 +1,19 @@
-img.bookImg {
+.home-page {
   display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+.home-page h3 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+img.bookImg {
+  /* display: flex; */
   height: 500px;
-  width: 800px;
-  margin-left: 30px;
-  padding: 50px;
-  object-fit: contain;
+  width: 700px;
+  border-radius: 6%;
+  object-fit: cover;
 }
